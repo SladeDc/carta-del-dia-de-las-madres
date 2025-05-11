@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Amor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #c9d6ff, #e2e2e2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .envelope {
+            background: linear-gradient(145deg, #ff758c 0%, #ff7eb3 100%);
+            width: 300px;
+            height: 200px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .envelope:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(-5deg);
+        }
+        
+        .envelope:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+        }
+        
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .envelope-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        
+        .card {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, #fff4f9 0%, #fff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            overflow: hidden;
+            display: none;
+            border: 1px solid rgba(255, 150, 180, 0.3);
+        }
+        
+        .card.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            display: block;
+        }
+        
+        .card-title {
+            background: linear-gradient(45deg, #ff5e87, #fb76b4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .card-message {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .card-final {
+            background: linear-gradient(45deg, #ff5e87, #ff97aa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            padding: 10px;
+            position: relative;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff5e8d;
+            transform: rotate(45deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: #ff5e8d;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: -10px;
+        }
+        
+        .decor {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            opacity: 0.4;
+        }
+        
+        .decor-1 {
+            top: 20px;
+            right: 20px;
+            transform: rotate(25deg);
+        }
+        
+        .decor-2 {
+            bottom: 20px;
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #ff76b0;
+            width: 3px;
+            height: 3px; 
+            border-radius: 50%;
+            opacity: 0;
+        }
+        
+        .star-large {
+            width: 6px;
+            height: 6px;
+        }
+        
+        .ribbon {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #ff5e87, #ff97aa, #ff5e87);
+            left: 0;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope pulse" id="envelope">
+        <div class="envelope-text">Haz Clic para Abrir ♥</div>
+    </div>
+    
+    <div class="card" id="card">
+        <div class="ribbon"></div>
+        <div class="card-title">Para Mi Persona Favorita</div>
+        <div class="card-message">
+            Cada día que paso a tu lado es un regalo especial. 
+            <br><br>
+            Me encanta cómo iluminas mi mundo con tu sonrisa, cómo me haces sentir cuando estamos juntos y todos los momentos mágicos que hemos compartido.
+            <br><br>
+            Eres ese sueño que nunca imaginé que se haría realidad, ese sentimiento inexplicable que hace que mi corazón se acelere con solo pensar en ti.
+        </div>
+        <div class="card-final">Te amo mucho ♥</div>
+        
+        <div class="decor decor-1">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 10 L40 30 L30 50 L20 30 Z" fill="none" stroke="#ff76b0" stroke-width="1.5"/>
+                <path d="M10 30 L30 20 L50 30 L30 40 Z" fill="none" stroke="#ff76b0" stroke-width="1.5"/>
+            </svg>
+        </div>
+        
+        <div class="decor decor-2">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 10 L40 30 L30 50 L20 30 Z" fill="none" stroke="#ff76b0" stroke-width="1.5"/>
+                <path d="M10 30 L30 20 L50 30 L30 40 Z" fill="none" stroke="#ff76b0" stroke-width="1.5"/>
+            </svg>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const envelope = document.getElementById('envelope');
+            const card = document.getElementById('card');
+            
+            envelope.addEventListener('click', function() {
+                envelope.style.display = 'none';
+                card.classList.add('open');
+                createHearts();
+                createStars();
+            });
+            
+            function createHearts() {
+                const heartCount = 40;
+                
+                for (let i = 0; i < heartCount; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.classList.add('heart');
+                        
+                        // Posición aleatoria
+                        const x = Math.random() * window.innerWidth;
+                        const y = Math.random() * window.innerHeight;
+                        
+                        // Tamaño aleatorio
+                        const size = Math.random() * 25 + 10;
+                        
+                        heart.style.left = x + 'px';
+                        heart.style.top = y + 'px';
+                        heart.style.width = size + 'px';
+                        heart.style.height = size + 'px';
+                        
+                        // Estilo aleatorio para cada corazón
+                        const hue = Math.random() * 30 + 340; // Tonos rosas y rojos
+                        const lightness = Math.random() * 20 + 60; // Más brillante
+                        heart.style.backgroundColor = `hsl(${hue}, 100%, ${lightness}%)`;
+                        
+                        document.body.appendChild(heart);
+                        
+                        // Animación
+                        const duration = Math.random() * 3 + 2;
+                        const direction = Math.random() > 0.5 ? 1 : -1;
+                        
+                        heart.animate([
+                            { transform: `rotate(45deg) scale(0)`, opacity: 0 },
+                            { transform: `rotate(45deg) scale(1)`, opacity: 0.8, offset: 0.2 },
+                            { transform: `rotate(45deg) scale(1) translate(${direction * 100}px, -300px)`, opacity: 0 }
+                        ], {
+                            duration: duration * 1000,
+                            easing: 'ease-out'
+                        }).onfinish = () => {
+                            heart.remove();
+                        };
+                        
+                        // Después de la primera ronda, seguir creando algunos corazones
+                        if (i === heartCount - 1) {
+                            setInterval(() => {
+                                const newHeart = heart.cloneNode(true);
+                                const newX = Math.random() * window.innerWidth;
+                                const newY = window.innerHeight;
+                                newHeart.style.left = newX + 'px';
+                                newHeart.style.top = newY + 'px';
+                                document.body.appendChild(newHeart);
+                                
+                                newHeart.animate([
+                                    { transform: `rotate(45deg) scale(0)`, opacity: 0 },
+                                    { transform: `rotate(45deg) scale(1)`, opacity: 0.8, offset: 0.2 },
+                                    { transform: `rotate(45deg) scale(1) translate(${direction * 100}px, -500px)`, opacity: 0 }
+                                ], {
+                                    duration: duration * 1000,
+                                    easing: 'ease-out'
+                                }).onfinish = () => {
+                                    newHeart.remove();
+                                };
+                            }, 1000);
+                        }
+                    }, i * 100);
+                }
+            }
+            
+            function createStars() {
+                const starCount = 60;
+                
+                for (let i = 0; i < starCount; i++) {
+                    setTimeout(() => {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        
+                        if (Math.random() > 0.7) {
+                            star.classList.add('star-large');
+                        }
+                        
+                        // Posición aleatoria
+                        const x = Math.random() * window.innerWidth;
+                        const y = Math.random() * window.innerHeight;
+                        
+                        star.style.left = x + 'px';
+                        star.style.top = y + 'px';
+                        
+                        document.body.appendChild(star);
+                        
+                        // Animación de brillo
+                        star.animate([
+                            { opacity: 0 },
+                            { opacity: 0.8 },
+                            { opacity: 0.2 },
+                            { opacity: 1 },
+                            { opacity: 0.2 }
+                        ], {
+                            duration: 2000 + Math.random() * 3000,
+                            iterations: Infinity
+                        });
+                    }, i * 50);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
